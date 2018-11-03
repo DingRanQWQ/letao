@@ -46,6 +46,17 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../res/mui/js/mui.min.js"></script>
 <script>
+   var search = location.search.slice(1);
+   var reg=/url=(.+)/;
+   var match = reg.exec(search);
+//    if(match){
+//        url=match[1];
+//    }else{
+//        url = '/index.html';
+//    }
+  var url=match && match[1];
+  url=url || '/index.html';
+
     $('form').on('submit',function(){
         var data = $(this).serialize();
         $.ajax({
@@ -55,7 +66,7 @@
             success:function(info){
                 //console.log(info);
                  if(info.success){
-                     location.href='../index.html';
+                     location.href=url;
                  }
             }
         })
